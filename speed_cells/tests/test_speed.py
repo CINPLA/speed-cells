@@ -79,7 +79,7 @@ def test_speed_nonlinear():
     speed = a * (np.sin(2*np.pi*f*t) + 1)
     spikes = nonstationary_poisson(t, speed)
     corr, inst_speed, inst_rate, times = speed_correlation(
-        speed, t, spikes, stddev=.4, filter_speed=True, percentile=95)
+        speed, t, spikes, stddev=.4, filter_speed=False)
     assert  round(corr, 2) > 0.5
 
 
@@ -89,5 +89,5 @@ def test_speed_linear():
     speed = np.linspace(0, 5, len(t))
     spikes = nonstationary_poisson(t, speed)
     corr, inst_speed, inst_rate, times = speed_correlation(
-        speed, t, spikes, stddev=.4, filter_speed=True, percentile=95)
+        speed, t, spikes, stddev=.4, filter_speed=False)
     assert  round(corr, 2) > 0.5
