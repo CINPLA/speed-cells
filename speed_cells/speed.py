@@ -33,7 +33,7 @@ def _filter_speed(speed, times, min_speed=0.0, max_speed=100):
 
 def speed_correlation(
     speed, times, spike_times, stddev=0.25, filter_speed=True,
-    min_speed=0.0, max_speed=100):
+    min_speed=0.0, max_speed=100, return_data=False):
     """
     Correlates instantaneous spike rate and rat velocity, using a method
     described in [1]
@@ -86,4 +86,7 @@ def speed_correlation(
     rate = rate.magnitude[mask, 0]
     correlation = np.corrcoef(inst_speed, rate)[1, 0]
 
-    return correlation, inst_speed, rate, times
+    if return_data:
+        return correlation, inst_speed, rate, times
+    else:
+        return correlation

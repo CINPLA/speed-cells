@@ -67,7 +67,8 @@ def test_speed_random():
         rate=rate, t_start=0, t_stop=t[-1])
     s = np.sqrt(x*x + y*y)
     speed = np.diff(s) / dt
-    corr, inst_speed, inst_rate, times = speed_correlation(speed, t, st)
+    corr, inst_speed, inst_rate, times = speed_correlation(
+        speed, t, st, return_data=True)
     assert  np.abs(corr) < 0.05
     assert inst_rate.mean().round() == rate
 
@@ -78,7 +79,7 @@ def test_speed_nonlinear():
     t = np.arange(0, 100, 1 / sampling_rate)
     speed = a * (np.sin(2*np.pi*f*t) + 1)
     spikes = nonstationary_poisson(t, speed)
-    corr, inst_speed, inst_rate, times = speed_correlation(
+    corr = speed_correlation(
         speed, t, spikes, stddev=.4, filter_speed=False)
     assert  round(corr, 2) > 0.5
 
@@ -88,6 +89,6 @@ def test_speed_linear():
     t = np.arange(0, 100, 1 / sampling_rate)
     speed = np.linspace(0, 5, len(t))
     spikes = nonstationary_poisson(t, speed)
-    corr, inst_speed, inst_rate, times = speed_correlation(
+    corr = speed_correlation(
         speed, t, spikes, stddev=.4, filter_speed=False)
     assert  round(corr, 2) > 0.5
