@@ -51,7 +51,7 @@ def speed_correlation(
         lower bound and upper percentile; see `filter_speed_percentile`
     Returns
     -------
-    out : correlation, (pearson, inst_speed)
+    out : correlation, (inst_speed, rate, times)
     References
     ----------
     [1]: Kropff, E., Carmichael, J. E., Moser, M. B., & Moser, E. I. (2015).
